@@ -138,10 +138,23 @@ async function update(req, res) {
     return res.json(imageAggiornata)
 }
 
+//####DELETE####
+async function destroy(req, res){
+
+    const id = req.params.id
+    await prisma.image.delete({
+        where:{
+            id: parseInt(id)
+        }
+    })
+    return res.json({message: 'Immagine eliminata'})
+}
+
 
 module.exports = {
     index,
     show,
     create,
-    update
+    update,
+    destroy
 }
