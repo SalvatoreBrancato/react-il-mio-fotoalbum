@@ -2,7 +2,7 @@ const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
 
-//index
+//####INDEX####
 async function index(req, res){
 
     //filtro published
@@ -49,7 +49,39 @@ async function index(req, res){
 }
 
 
-//create
+//####SHOW####
+async function show(req,res){
+    const id = req.params.id
+
+    const data = await prisma.image.findUnique({
+        where:{
+            id: parseInt(id)
+        },
+        include: {
+            categories:{
+                select:{
+                    name: true
+                }
+            },
+            comments:{
+                select:{
+                    email: true,
+                    message: true,
+                    createdAt: true
+                }
+            }
+        }
+    })
+
+    if (!data) {
+        throw new Error("Not found");
+        console.log('errore')
+      }
+     
+    return res.json(data)
+}
+
+//####CREATE####
 async function create(req, res){
     const datiInIngresso = req.body
 
@@ -72,5 +104,6 @@ async function create(req, res){
 
 module.exports = {
     index,
+    show,
     create,
 }
