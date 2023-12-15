@@ -3,6 +3,7 @@ const cors = require('cors');
 const imageRouter = require('./routers/imageRouter');
 const categoriesRouter = require('./routers/categoriesRouter');
 const authRouter = require('./routers/authRouter');
+const contactRouter = require('./routers/contactRouter');
 
 const app = express()
 
@@ -17,6 +18,7 @@ app.use(express.static("public"));
 
 app.use('/', imageRouter);
 app.use('/categories', categoriesRouter)
+app.use('/contact', contactRouter)
 app.use('', authRouter)//registriamo le rotte senza alcun prefisso
 
 

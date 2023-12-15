@@ -53,5 +53,10 @@ model Comment {
   updateAt  DateTime @updatedAt
 }
 
-// category   Category @relation(fields: [categoryId], references: [id])
-// categoryId Int
+model Contact {
+  id Int @id @default(autoincrement())
+  email String
+  message String
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
