@@ -85,6 +85,16 @@ async function show(req, res) {
 //####CREATE####
 async function create(req, res) {
     const datiInIngresso = req.body
+    console.log(datiInIngresso)
+
+    const file = req.file;
+    if(file){
+        datiInIngresso.image=file.filename
+    }
+
+    if(datiInIngresso.visibility === "true" || "1"){
+        datiInIngresso.visibility = true
+    }
 
     const newImage = await prisma.image.create({
         data: {

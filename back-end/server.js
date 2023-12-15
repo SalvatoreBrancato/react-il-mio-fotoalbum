@@ -12,10 +12,13 @@ const port = 3000
 app.use(cors());
 
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+app.use(express.static("public"));
 
 app.use('/', imageRouter);
 app.use('/categories', categoriesRouter)
 app.use('', authRouter)//registriamo le rotte senza alcun prefisso
+
 
 app.listen(port, ()=>{
     console.log(`http://localhost:${port}`)
