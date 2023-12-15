@@ -8,7 +8,7 @@ export default function PhotoComp(){
 
     //Fetching dei dati
     function apiPhoto(){
-        fetch("http://localhost:3000/image?visibility=true")
+        fetch("http://localhost:3000/image")
         .then((res) => res.json())
         .then(setPhoto);
     }
@@ -26,6 +26,7 @@ export default function PhotoComp(){
                                 <img src={`http://localhost:3000/${elem.image}`} className="w-full h-3/4" alt="" />
                                 <h2 className="capitalize">{elem.title}</h2>
                                 <p>{elem.description}</p>
+                                <div>{elem.visibility}</div>
                             </Link>
                         </div>
                     )

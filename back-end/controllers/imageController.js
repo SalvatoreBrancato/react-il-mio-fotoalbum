@@ -10,7 +10,7 @@ async function index(req, res) {
     const query = {}
     if (filtroPublished == 'true') {
         query.where = {
-            visibilty: true
+            visibility: true
         }
     }
 

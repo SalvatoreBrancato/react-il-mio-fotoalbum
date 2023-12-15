@@ -9,8 +9,8 @@ export default function HeaderComp(){
             <div className="flex justify-end w-50">
                 <Link to="/">Home</Link>
                 <Link className="mx-5" to="/photo">Foto</Link>
-                <Link to="/contact">Contatti</Link>
-                <Link className="ms-5" to="/login">Area personale</Link>
+                <Link to="/admin/create">Inserisci foto</Link>
+                <Link className="mx-5" to="/admin/update">Modifica foto</Link>
             </div>
         </header>
     );
