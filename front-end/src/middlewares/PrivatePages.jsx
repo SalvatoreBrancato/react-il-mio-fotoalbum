@@ -7,5 +7,6 @@ export default function PrivatePages({ children }) {
     const { isLoggedIn } = useAuth();
 
     if (!isLoggedIn) return <Navigate to="/login" />;
+    
     return children;
 }

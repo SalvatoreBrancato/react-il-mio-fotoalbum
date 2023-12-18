@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useNavigate ,useParams } from "react-router-dom";
+import { Navigate, useNavigate ,useParams } from "react-router-dom";
+import axios from '../axiosClient'
 
 export default function SinglePhotoComp(){
 
@@ -14,6 +15,17 @@ export default function SinglePhotoComp(){
         .then(setSinglePhoto);
     }
 
+    function deletePhoto(){
+        axios.delete(`/image/${id}`)
+        .then(data => {
+            console.log(data);
+            navigate('/admin')
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        })
+    }
+
     //solo al primo rendering
     useEffect(apiSinglePhoto, [])
 
@@ -26,7 +38,10 @@ export default function SinglePhotoComp(){
                 <h2 className="capitalize" key={singlePhoto.id}>{singlePhoto.title}</h2>
                 <p>{singlePhoto.description}</p>
             </div>
-            <button onClick={()=>navigate(-1)}> 🔙Torna alla pagina precedente</button>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
+                    focus:outline-none focus:shadow-outline" onClick={()=>navigate(-1)}> 🔙Torna alla pagina precedente</button>
+            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded
+                    focus:outline-none focus:shadow-outline mx-5" onClick={()=>{deletePhoto()}}>Elimina foto</button>
         </>
     )
 }

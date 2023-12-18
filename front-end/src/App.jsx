@@ -11,6 +11,7 @@ import DashboardPage from "./pages/DashboardPage";
 import PrivatePages from "./middlewares/PrivatePages";
 import CreatePage from './pages/authPages/CreatePage';
 import UpdatePage from './pages/authPages/UpdatePage';
+import MessagePage from './pages/authPages/MessagePage';
 function App() {
 
 
@@ -37,6 +38,7 @@ function App() {
               <Route index element={<DashboardPage />}></Route>
               <Route path='/admin/create' element={<CreatePage/>}></Route>            
               <Route path='/admin/update' element={<UpdatePage/>} ></Route>
+              <Route path='/admin/message' element={<MessagePage/>} ></Route>
             </Route>
           </Routes>
         </AuthProvider>

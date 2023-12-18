@@ -27,6 +27,7 @@ export default function LogIn(){
 
         try{
           await handleLogin(formData);
+          localStorage.setItem("isLoggedIn", true)
           navigate('/admin')
         }catch (err){
           setError(err.message)

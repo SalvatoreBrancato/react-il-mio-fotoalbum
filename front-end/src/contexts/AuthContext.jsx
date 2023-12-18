@@ -5,7 +5,8 @@ import axios from '../axiosClient'
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
+    const [token, setToken] = useState(() => localStorage.getItem("token") ?? null);
     const [user, setUser] = useState({});
     const navigate = useNavigate();
 
@@ -17,6 +18,9 @@ function AuthProvider({ children }) {
             const {data} = await axios.post('/login', payload);
             setUser(data.user)
             setIsLoggedIn(true)
+            //salvo il token
+            setToken(data.token)
+            localStorage.setItem('token', data.token)
         }catch(error){
             throw new Error(error.response.data)
         }
@@ -24,7 +28,16 @@ function AuthProvider({ children }) {
 
     function handleLogout() {
         setIsLoggedIn(false);
-    }
+        setUser(null);
+        setToken(null)
+        localStorage.removeItem("token");
+
+        // prima finisci di fare quello che stai facendo, come update stati e rendering,
+        // dopo esegue la navigazione
+        setTimeout(() => {
+            navigate("/");
+        });
+        }
 
     const values = {
         isLoggedIn,

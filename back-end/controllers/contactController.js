@@ -1,6 +1,18 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+
+async function index(req, res){
+    const data = await prisma.contact.findMany({
+        select:{
+            email: true,
+            message: true
+        }
+    })
+    return res.json(data)
+}
+
+
 async function create(req, res){
     const datiInIngresso = req.body
 
@@ -16,5 +28,6 @@ async function create(req, res){
 
 
 module.exports = {
+    index,
     create
 }
